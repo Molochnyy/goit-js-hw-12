@@ -1,7 +1,7 @@
 import axios from 'axios';
 import iziToast from 'izitoast';
 
-const API_KEY = '43838744-76530a55bebff011fa4d493be';
+const API_KEY = '44066114-c3ff57994064ae6e377a0cfb1';
 const BASE_URL = 'https://pixabay.com/api/';
 
 export const fetchImages = async (query, page = 1, perPage = 15) => {
