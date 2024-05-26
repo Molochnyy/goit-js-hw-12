@@ -1,38 +1,44 @@
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-export function displayImages(images, gallery) {
-    const markup = images.map(image => `
-    <li class="gallery-item">
-      <a class="gallery-link" href="${image.largeImageURL}">
-        <div class="full-image">
-          <img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}">
-          <ul class="image-button">
-            <li><p>Likes</p><p>${image.likes}</p></li>
-            <li><p>Views</p><p>${image.views}</p></li>
-            <li><p>Comments</p><p>${image.comments}</p></li>
-            <li><p>Downloads</p><p>${image.downloads}</p></li>
-          </ul>
+export const listImg = document.querySelector('.list');
+const lightbox = new SimpleLightbox('.item-list-link', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  overlayOpacity: 0.8,
+});
+
+export const markupInterface = data => {
+  const markup = data.hits
+    .map(hit => {
+      return `
+      <li class="item-list">
+        <a href="${hit.largeImageURL}" class="item-list-link">
+          <img class="item-list-img" src="${hit.webformatURL}" alt="${hit.tags}">
+        </a>
+        <div class='markup-info'>
+          <div class="item-list-info-text">
+            <h3 class="item-list-title">Likes</h3>
+            <p class="item-list-text">${hit.likes}</p>
+          </div>
+          <div class="item-list-info-text">
+            <h3 class="item-list-title">Views</h3>
+            <p class="item-list-text">${hit.views}</p>
+          </div>
+          <div class="item-list-info-text">
+            <h3 class="item-list-title">Comments</h3>
+            <p class="item-list-text">${hit.comments}</p>
+          </div>
+          <div class="item-list-info-text">
+            <h3 class="item-list-title">Downloads</h3>
+            <p class="item-list-text">${hit.downloads}</p>
+          </div>
         </div>
-      </a>
-    </li>
-  `).join('');
-    gallery.insertAdjacentHTML('beforeend', markup);
+      </li>
+    `;
+    })
+    .join('');
 
-    const lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-    });
-    lightbox.refresh();
-}
-
-export function displayToast(message, type) {
-    iziToast[type]({
-        message,
-        messageColor: 'white',
-        position: 'topRight',
-        backgroundColor: type === 'error' ? 'red' : 'green',
-    });
-}
+  listImg.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
+};

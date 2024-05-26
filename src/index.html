@@ -2,22 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Search</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <title>homework-12</title>
   </head>
-
   <body>
-    <section>
-      <form class="form" name="search_form" autocomplete="off">
-        <input type="text" name="search_input" placeholder="Search images..." />
-        <button type="submit">Search</button>
-      </form>
-      <ul class="gallery"></ul>
-      <div class="spinner is-hidden"></div>
-      <button class="load-button is-hidden" type="button">Load more</button>
-    </section>
+    <form name="searchButton" class="searchForm">
+      <label>
+        <input type="text" class="input" />
+      </label>
+      <button type="submit" class="searchButton">Search</button>
+    </form>
+    <ul class="list"></ul>
+
+    <button class="load-more" style="display: none">Load more</button>
+    <div class="loader" style="display: none"></div>
 
     <script type="module" src="./main.js"></script>
   </body>
